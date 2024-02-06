@@ -67,7 +67,7 @@ dependencies {
 }
 
 
-val libVersion = "0.0.1"
+val libVersion = "0.1.0"
 publishing {
     publications {
         create<MavenPublication>("release") {
