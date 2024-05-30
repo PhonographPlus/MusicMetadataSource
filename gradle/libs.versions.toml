@@ -1,14 +1,20 @@
 [versions]
+
+## Plugins
+
 kotlin = "1.9.22"
 agp = "8.4.1"
 ksp = "1.9.22-1.0.17"
 versionChecker = "0.51.0"
 
-activity = "1.8.2"
-datastore = "1.0.0"
-compose = "1.6.0"
-composeCompiler = "1.5.8"
-coil = "2.5.0"
+## Libraries
+
+activity = "1.9.0"
+datastore = { strictly = "1.0.0" }
+compose = "1.6.6"
+composeCompiler = "1.5.10"
+coil = "2.6.0"
+koin = "3.5.6"
 room = "2.6.1"
 
 [plugins]
@@ -25,12 +31,9 @@ kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 versionChecker = { id = "com.github.ben-manes.versions", version.ref = "versionChecker" }
 
-
-
-
 [libraries]
 
-androidx-core = "androidx.core:core-ktx:1.12.0"
+androidx-core = "androidx.core:core-ktx:1.13.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-documentfile = "androidx.documentfile:documentfile:1.0.1"
@@ -86,25 +89,14 @@ compose-activity = { group = "androidx.activity", name = "activity-compose", ver
 #
 
 okhttp3 = "com.squareup.okhttp3:okhttp:4.12.0"
-retrofit2 = "com.squareup.retrofit2:retrofit:2.9.0"
-kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
+retrofit2 = "com.squareup.retrofit2:retrofit:2.11.0"
+kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
 kotlinx-serialization-ktoml = "com.akuleshov7:ktoml-core:0.5.0"
-kotlinx-serialization-kaml = "com.charleskorn.kaml:kaml:0.55.0"
+kotlinx-serialization-kaml = "com.charleskorn.kaml:kaml:0.57.0"
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
-koin = "io.insert-koin:koin-android:3.5.0"
-kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-
-#
-# Gradle API
-#
-# androidGradlePluginAPI = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
-
-#
-# other
-#
-
-menuDsl = "io.github.chr56:android-menu-dsl:0.1.3"
+koin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 
 [bundles]
 
