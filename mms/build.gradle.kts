@@ -80,6 +80,7 @@ publishing {
 
             pom {
                 name.set("Music Metadata Source")
+                description.set("A library contains encapsulated APIs from LastFM and Musicbrainz to fetch Music Metadata or Music Tags.")
                 url.set("https://github.com/PhonographPlus/MusicMetadataSource")
 
                 licenses {
