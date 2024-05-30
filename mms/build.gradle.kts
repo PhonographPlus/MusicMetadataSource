@@ -1,10 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidGradlePluginLibrary)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     id("maven-publish")
+    id("signing")
 }
+
+
+val libVersion = "0.1.0"
 
 android {
     compileSdk = 34
@@ -66,8 +72,14 @@ dependencies {
 
 }
 
+val secretPropsFile = rootProject.file("secrets.properties")
+var secrets = Properties()
+if (secretPropsFile.exists()) {
+    secretPropsFile.inputStream().use {
+        secrets.load(it)
+    }
+}
 
-val libVersion = "0.1.0"
 publishing {
     publications {
         create<MavenPublication>("release") {
@@ -96,5 +108,17 @@ publishing {
                 }
             }
         }
+    }
+}
+
+if (secretPropsFile.exists()) {
+    signing {
+        sign(publishing.publications)
+        val key = File(secrets["signing_file"] as String).readText()
+        useInMemoryPgpKeys(
+            secrets["signing_key"] as String,
+            key,
+            secrets["signing_password"] as String
+        )
     }
 }
