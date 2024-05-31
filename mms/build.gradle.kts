@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
 import java.util.Properties
 
 plugins {
@@ -5,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
-    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.28.0"
     id("signing")
 }
 
@@ -46,14 +48,6 @@ android {
         jvmTarget = "1.8"
     }
 
-    publishing {
-        publishing {
-            singleVariant("release") {
-                withSourcesJar()
-            }
-        }
-    }
-
     buildFeatures {
         buildConfig = false
         // viewBinding = true
@@ -80,33 +74,35 @@ if (secretPropsFile.exists()) {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-            groupId = "io.github.chr56"
-            artifactId = "music-metadata-source"
-            version = libVersion
+mavenPublishing {
+    // signAllPublications()
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    configure(AndroidSingleVariantLibrary(publishJavadocJar = false))
+    coordinates("io.github.phonographplus", "music-metadata-source", libVersion)
+    pom {
+        name.set("Music Metadata Source")
+        description.set("A library contains encapsulated APIs from LastFM and Musicbrainz to fetch Music Metadata or Music Tags.")
+        url.set("https://github.com/PhonographPlus/MusicMetadataSource")
 
-            pom {
-                name.set("Music Metadata Source")
-                description.set("A library contains encapsulated APIs from LastFM and Musicbrainz to fetch Music Metadata or Music Tags.")
-                url.set("https://github.com/PhonographPlus/MusicMetadataSource")
-
-                licenses {
-                    license {
-                        name.set("MPL-2.0")
-                        url.set("https://www.mozilla.org/MPL/2.0/")
-                    }
-                }
-                scm {
-                    connection.set("https://github.com/PhonographPlus/MusicMetadataSource.git")
-                    developerConnection.set("https://github.com/PhonographPlus/MusicMetadataSource.git")
-                    url.set("https://github.com/PhonographPlus/MusicMetadataSource")
+        developers {
+            developers {
+                developer {
+                    id.set("phonographplus")
+                    name.set("PhonographPlus")
                 }
             }
+        }
+
+        licenses {
+            license {
+                name.set("MPL-2.0")
+                url.set("https://www.mozilla.org/MPL/2.0/")
+            }
+        }
+        scm {
+            connection.set("https://github.com/PhonographPlus/MusicMetadataSource.git")
+            developerConnection.set("https://github.com/PhonographPlus/MusicMetadataSource.git")
+            url.set("https://github.com/PhonographPlus/MusicMetadataSource")
         }
     }
 }
