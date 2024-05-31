@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "Template"
+rootProject.name = "Music Metadata Source"
 rootProject.buildFileName = "build.gradle.kts"
 
 pluginManagement {
