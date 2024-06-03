@@ -6,8 +6,14 @@ This library contains encapsulated APIs from [LastFM](https://www.last.fm/) and 
 
 ## Gradle
 
-```groovy
+It is available on JitPack & Maven Central.
+
+```kotlin
 dependencies {
-    implementation("com.github.PhonographPlus:MusicMetadataSource:0.1.0")
+    // Maven Central
+    implementation("io.github.phonographplus:music-metadata-source:0.1.1")
+    
+    // or Jitpack
+    // implementation("com.github.PhonographPlus:MusicMetadataSource:0.1.1")
 }
 ```
