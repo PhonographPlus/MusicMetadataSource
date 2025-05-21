@@ -21,14 +21,14 @@ suspend fun <T> Call<RestResult<T>?>.emit(): RestResult<T> =
             override fun onResponse(call: Call<RestResult<T>?>, response: Response<RestResult<T>?>) {
                 continuation.resume(
                     response.body() ?: RestResult.RemoteError(response.errorBody()?.string().orEmpty())
-                ) {}
+                ) { cause, _, _ -> }
             }
 
             override fun onFailure(call: Call<RestResult<T>?>, t: Throwable) {
                 if (continuation.isCancelled) {
                     continuation.cancel()
                 } else {
-                    continuation.resume(RestResult.NetworkError(t)) { }
+                    continuation.resume(RestResult.NetworkError(t)) { cause, _, _ -> }
                 }
             }
         })
