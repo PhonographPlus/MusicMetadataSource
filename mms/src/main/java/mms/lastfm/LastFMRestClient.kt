@@ -4,17 +4,17 @@
 
 package mms.lastfm
 
-import mms.util.JsonDeserializationRetrofitConverter
-import okhttp3.internal.format
 import mms.AbsRestClient
+import mms.util.JsonDeserializationRetrofitConverter
 import android.content.Context
+import java.util.Locale
 
 class LastFMRestClient(context: Context, userAgent: String) : AbsRestClient<LastFMService>(
     okHttpClientConfig = {
         defaultCache(context, "/okhttp-lastfm/")
     },
     headerConfig = {
-        addHeader("Cache-Control", format("max-age=%d, max-stale=%d", 31536000, 31536000))
+        addHeader("Cache-Control", String.format(Locale.US, "max-age=%d, max-stale=%d", 31536000, 31536000))
     },
     retrofitConfig = {
         baseUrl(BASE_URL)
